@@ -167,19 +167,20 @@ void wheel(GLfloat x, GLfloat y, GLfloat z, GLfloat thick, GLfloat size) {
 }
 
 // Tuong rao va San cong truong
+GLfloat rtCTX = 0, rtCTY = 0, rtCTZ = 0;
 void veAllTuong() {
 	// Tuong sau
-	block(0, 0.25, -9.99, 20, 0.5, 0.02);
+	block(0, 0.25, -4.99, 10, 0.5, 0.02);
 	// Tuong truoc
-	block(0, 0.25, 9.99, 20, 0.5, 0.02);
+	block(0, 0.25, 4.99, 10, 0.5, 0.02);
 	// Tuong phai
-	block(9.99, 0.25, 0, 0.02, 0.5, 20);
+	block(4.99, 0.25, 0, 0.02, 0.5, 10);
 	// Tuong trai
-	block(-9.99, 0.25, 0, 0.02, 0.5, 20);
+	block(-4.99, 0.25, 0, 0.02, 0.5, 10);
 }
 void veSanCongTruong() {
 	Paint(244, 164, 96);
-	block(0, -0.015, 0, 20.0, 0.03, 20.0);
+	block(0, -0.015, 0, 10.0, 0.03, 10.0);
 	Paint(176, 196, 222);
 	veAllTuong();
 }
@@ -217,7 +218,7 @@ void nhaDangXay() {
 }
 
 // Xe tai
-GLfloat rtdY = 0;
+GLfloat rtdY = 0, rtTXX = 0;
 void cabinXeTai() {
 	Paint(0, 255, 0);
 	mat4 mdl = model;
@@ -249,7 +250,6 @@ void cabinXeTai() {
 	block(0, 0.5, -0.385, 0.04, 0.92, 0.15);
 	block(0, 0.91, 0, 0.04, 0.1, 0.62);
 }
-GLfloat rtTXX = 0;
 void thungXeTai() {
 	// Be thung
 	block(0, 0.02, -1.65, 1.15, 0.04, 2.3);
@@ -356,6 +356,7 @@ void xeTai1() {
 }
 
 // Can cau
+GLfloat tdCBCC = 0.0, rtCCY = 0.0, tYHHCC = 0.25, tZHHCC = 2.175;
 void cotCanCau() {
 	block(0, 3.3, 0, 0.25, 6.6, 0.25);
 
@@ -377,7 +378,6 @@ void trucVaTaCanCau() {
 	// Ta can cau
 	block(0, 6.625, -1.9, 0.25, 0.5, 0.5);
 }
-GLfloat tdCBCC = 0.0;
 void cabinCanCau() {
 	mat4 mdlCBCC = model;
 	block(0, 6.65, 0.2625, 0.3, 0.025, 0.025);
@@ -410,7 +410,6 @@ void cabinCanCau() {
 	block(0, 6.625, -0.06875, 0.25, 0.05, 0.1375);
 
 }
-GLfloat rtCCY = 0.0, tYHHCC = 0.25, tZHHCC = 2.175;
 void canCau() {
 	Paint(255, 0, 0);
 	cotCanCau();
@@ -430,59 +429,6 @@ void canCau() {
 	block(0, 0, 0, 1, 1, 1);
 }
 
-// May xuc
-GLfloat rtCBMXY = 0.0;
-void cabinMX() {
-	block(0.225, 0.16, 0.225, 0.3, 0.02, 0.3);
-	block(0.225, 0.67, 0.225, 0.3, 0.02, 0.3);
-
-	block(0.225, 0.185, 0.365, 0.2, 0.05, 0.02);
-	block(0.225, 0.635, 0.365, 0.2, 0.05, 0.02);
-	block(0.35, 0.41, 0.365, 0.05, 0.5, 0.02);
-	block(0.1, 0.41, 0.365, 0.05, 0.5, 0.02);
-
-	block(0.225, 0.185, 0.085, 0.2, 0.05, 0.02);
-	block(0.225, 0.635, 0.085, 0.2, 0.05, 0.02);
-	block(0.35, 0.41, 0.085, 0.05, 0.5, 0.02);
-	block(0.1, 0.41, 0.085, 0.05, 0.5, 0.02);
-
-	block(0.085, 0.185, 0.225, 0.02, 0.05, 0.2);
-	block(0.085, 0.635, 0.225, 0.02, 0.05, 0.2);
-	block(0.085, 0.41, 0.33, 0.02, 0.5, 0.05);
-	block(0.085, 0.41, 0.12, 0.02, 0.5, 0.05);
-
-	model = model * Translate(0.365, 0, 0.37) * RotateY(rtCBMXY) * Translate(0, 0, -0.37);
-	block(0, 0.185, 0.225, 0.02, 0.05, 0.2);
-	block(0, 0.635, 0.225, 0.02, 0.05, 0.2);
-	block(0, 0.41, 0.33, 0.02, 0.5, 0.05);
-	block(0, 0.41, 0.12, 0.02, 0.5, 0.05);
-}
-void HMX() {
-	//block();
-}
-GLfloat rtMXY = 0.0, rtAMXY = 0.0;
-void mayXuc() {
-	//// Be may xuc
-	//block(0, 0.0375, 0, 0.6, 0.075, 0.4);
-	//model = model * RotateY(rtMXY);
-	//mat4 mdlAMX = model;
-	//block(0, 0.1125, 0, 0.6, 0.075, 0.4);
-
-	//// Dong co va cabin
-	//block(0, 0.3, -0.15, 0.975, 0.3, 0.3);
-	//block(-0.3, 0.3, 0.15, 0.375, 0.3, 0.3);
-	//cabinMX();
-
-	//// Canh tay may xuc
-	//model = mdlAMX * RotateX(-60);
-	//block(0, 0.2, 0.8, 0.1, 0.1, 1.5);
-	//model = model;
-	//block(0, -0.15, 1.5, 0.1, 0.7, 0.1);
-	model = model;
-	HMX();
-
-}
-
 // Xe nang
 GLfloat rtdXN = 0, tHXN = 0.025;
 void allXNWheel() {
@@ -491,6 +437,7 @@ void allXNWheel() {
 	wheel(0, 0, -0.35, 0.065, 0.1);
 }
 void xeNang() {
+	Paint(0, 0, 255);
 	model = model * Translate(0, 0.065, 0);
 	block(0, 0.01, 0, 0.5, 0.02, 0.5);
 	block(0, 0.98, 0, 0.5, 0.02, 0.5);
@@ -531,56 +478,38 @@ void xeNang() {
 	allXNWheel();
 }
 
-GLfloat rtCTX = 0, rtCTY = 0, rtCTZ = 0, tXT = 0.0;
+GLfloat tXT = 0, tXN = 0;
 void congTruong() {
 	model = RotateX(rtCTX) * RotateY(rtCTY) * RotateZ(rtCTZ);
 	mat4 mdlCT = model;
-
 	veSanCongTruong();
 
-	//const int rtX1 = -90, rtX2 = 60;
-	//model = mdlCT * Translate(-3.5 - tXT, 0.02, 0) * RotateY(rtX1) * Scale(0.4);
-	//xeTai();
-	//model = mdlCT * RotateY(rtX2) * Translate(4, 0.02, tXT) * Scale(0.4);
-	//xeTai1();
+	model = mdlCT * Translate(-3.5 - tXT, 0.02, 0) * RotateY(-90) * Scale(0.4);
+	xeTai();
+	model = mdlCT * RotateY(60) * Translate(4, 0.02, 2 * tXT) * Scale(0.4);
+	xeTai1();
 
-	//model = mdlCT;
-	//mayXuc();
-
-	//model = mdlCT;
-	//mayCau();
-
-	model = mdlCT;
+	model = mdlCT * Translate(tXN, 0, 3.3) * RotateY(-90);
 	xeNang();
 
-	//model = mdlCT * RotateY(-50) * Translate(3, 0, -2.5);
-	//canCau();
+	model = mdlCT * Translate(2.88, 0, 2) * RotateY(-40);
+	canCau();
 
-	//model = mdlCT * Translate(0, -0.02, 0) * Scale(2, 5, 2);
-	//nhaDangXay();
+	model = mdlCT * Translate(0, -0.02, 0) * Scale(2, 5, 2);
+	nhaDangXay();
 
 	//model = mdlCT;
 	//vatThe();
-
 }
 
-GLfloat eX = 0.0, eY = 0.0, eZ = 4.0;
-GLfloat lt = -1, rt = 1, bt = -1, tp = 1, zNr = 1, zFr = 5;
-
-//GLfloat eX = 0.0, eY = 0.0, eZ = 10.0;
-//GLfloat lt = -5, rt = 5, bt = -5, tp = 5, zNr = 2.5, zFr = 15;
-//GLfloat rs = 1, tt = 0, ph = 0;
-//const GLfloat dr = 5.0 * DegreesToRadians;
+GLfloat eX = 0.0, eY = 0.0, eZ = 10.0;
+GLfloat lt = -5, rt = 5, bt = -5, tp = 5, zNr = 2.5, zFr = 12;
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	congTruong();
 	vec4 eye(eX, eY, eZ, 1);
-	//point4 eye(rs * sin(tt) * cos(ph),
-	//		   rs * sin(tt) * sin(ph),
-	//		   rs * cos(tt),
-	//		   1.0);
 	vec4 at(0, 0, 0, 1);
 	vec4 up(0, 1, 0, 1);
 	view = LookAt(eye, at, up);
@@ -603,19 +532,35 @@ void keyboard(unsigned char key, int x, int y)
 			exit(1);
 			break;
 		case ' ':
-			rtCTX = 0; rtCTY = 0; rtCTZ = 0;
-			eX = 0; eY = 0.0; eZ = 10.0;
-			//lt = -5; rt = 5; bt = -5; tp = 5; 
-			zNr = 2.5; zFr = 15;
-			//rs = 7; tt = 0; ph = 0;
+			rtCTX = 0, rtCTY = 0, rtCTZ = 0;
+			eX = 0, eY = 0.0, eZ = 10.0;
+			lt = -5, rt = 5, bt = -5, tp = 5; 
+			zNr = 2.5, zFr = 15;
 
-			rtTXX = 0; rtdY = 0; tXT = 0;
-			tdCBCC = 0; tYHHCC = 0.25; tZHHCC = 2.175;
-			rtAMXY = 0;
+			rtdY = 0, rtTXX = 0;
+			rtdXN = 0, tHXN = 0.025;
+			tdCBCC = 0.0, rtCCY = 0.0, tYHHCC = 0.25, tZHHCC = 2.175;
 			break;
 	}
 
-	// Dieu khien goc nhin va Cong Truong
+	/* 
+	* Dieu khien goc nhin va Cong Truong
+	* 
+	* Xoay toàn bộ công trường
+	*   w  -     X      +  s
+	*   a  -     Y      +  d
+	*   e  -     Z      +  q
+	*
+	* Điều khiển vị trí camera
+	*   l  -    eyeX    +  '
+	*	;  -    eyeY    +  p
+	*   [  -    eyeZ    +  o
+	* 
+	* Thay đổi viewing
+	*	2  -     lt     +  1
+	*	4  -     bt     +  3
+	*   6  -  zNr, zFr  +  5
+	*/
 	switch (key) {
 		case 's':
 			rtCTX += 5;
@@ -650,12 +595,12 @@ void keyboard(unsigned char key, int x, int y)
 		case 'o': eZ += 0.1; break;
 		case '[': eZ -= 0.1; break;
 
-		//case '7': lt *= 1.1; rt *= 1.1; break;
-		//case '8': lt *= 0.9; rt *= 0.9; break;
-		//case '9': bt *= 1.1; tp *= 1.1; break;
-		//case '0': bt *= 0.9; tp *= 0.9; break;
-		case '`': zNr *= 1.1; zFr *= 1.1; break;
-		case '~': zNr *= 0.9; zFr *= 0.9; break;
+		case '1': lt *= 1.1; rt *= 1.1; break;
+		case '2': lt *= 0.9; rt *= 0.9; break;
+		case '3': bt *= 1.1; tp *= 1.1; break;
+		case '4': bt *= 0.9; tp *= 0.9; break;
+		case '5': zNr *= 1.1; zFr *= 1.1; break;
+		case '6': zNr *= 0.9; zFr *= 0.9; break;
 
 		//case '&': rs *= 2.0; break;
 		//case '*': rs *= 0.5; break;
@@ -667,15 +612,15 @@ void keyboard(unsigned char key, int x, int y)
 
 	/*
 	* Dieu khien xe tai:
-	* e, d: tien, lui
-	* q, a: dong, mo cua
-	* w, s: nang, ha thung xe
+	* r, R: tien, lui
+	* Z, z: dong, mo cua
+	* X, x: nang, ha thung xe
 	*/
 	switch (key) {
 		// Tien lui
 		case 'r':
 			tXT += 0.1;
-			if (tXT > 3.5) tXT = 3.5;
+			if (tXT > 1) tXT = 1;
 			break;
 		case 'R':
 			tXT -= 0.1;
@@ -705,10 +650,10 @@ void keyboard(unsigned char key, int x, int y)
 
 	/*
 	* Dieu khien can cau:
-	* y, h: nang, ha hang hoa
-	* u, j: tien, lui hang hoa
-	* r, f: xoay can cau
-	* t, g: mo cua cabin
+	* t, T: nang, ha hang hoa
+	* y, Y: tien, lui hang hoa
+	* C, c: xoay can cau
+	* v, V: mo cua cabin
 	*/
 	switch (key) {
 		// Nang, ha hang hoa
@@ -753,54 +698,20 @@ void keyboard(unsigned char key, int x, int y)
 	}
 
 	/*
-	* Dieu khien may xuc
-	*/
-	switch (key) {
-		// Tien lui
-		case 'u':
-			break;
-		case 'U':
-			break;
-
-		// Xoay may xuc
-		case 'b':
-			rtMXY += 5;
-			if (rtMXY > 360) rtMXY -= 360;
-			break;
-		case 'B':
-			rtMXY -= 5;
-			if (rtMXY < -360) rtMXY += 360;
-			break;
-
-		// Mo cua
-		case 'N':
-			rtCBMXY += 5;
-			if (rtCBMXY > 0) rtCBMXY = 0;
-			break;
-		case 'n':
-			rtCBMXY -= 5;
-			if (rtCBMXY < -90) rtCBMXY = -90;
-			break;
-
-		// Nang tay may xuc
-		case 'M':
-			rtAMXY += 5;
-			if (rtAMXY > 0) rtAMXY = 0;
-			break;
-		case 'm':
-			rtAMXY -= 5;
-			if (rtAMXY < -35) rtAMXY = -35;
-			break;
-	}
-
-	/*
 	* Dieu khien xe nang
+	* i, I: tien, lui
+	* , <: Mo, dong cua
+	* . >: Nang, ha cang xe
 	*/
 	switch (key) {
 		// Tien lui
 		case 'i':
+			tXN -= 0.1;
+			if (tXN < -1.5) tXN = -1.5;
 			break;
 		case 'I':
+			tXN += 0.1;
+			if (tXN > 0) tXN = 0;
 			break;
 
 		// Mo, dong cua
@@ -813,7 +724,7 @@ void keyboard(unsigned char key, int x, int y)
 			if (rtdXN > 0) rtdXN = 0;
 			break;
 
-		// Nang, ha don ganh
+		// Nang, ha cang xe
 		case '.':
 			tHXN += 0.025;
 			if (tHXN > 1.225) tHXN = 1.225;
@@ -822,7 +733,6 @@ void keyboard(unsigned char key, int x, int y)
 			tHXN -= 0.025;
 			if (tHXN < 0.025) tHXN = 0.025;
 			break;
-
 	}
 
 	glutPostRedisplay();
