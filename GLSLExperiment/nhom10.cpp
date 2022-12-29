@@ -277,13 +277,13 @@ void allWheel() {
 void xeTai() {
 	mat4 mdlXT = model;
 
-	model = mdlXT * Translate(0, 0.005, 0);
+	model = mdlXT * Translate(0, 0.17, 0);
 	cabinXeTai();
 
-	model = mdlXT * Translate(0, 0.005, 0);
+	model = mdlXT * Translate(0, 0.17, 0);
 	thungXeTai();
 
-	model = mdlXT;
+	model = mdlXT * Translate(0, 0.155, 0);
 	allWheel();
 }
 
@@ -345,13 +345,13 @@ void allWheel1() {
 void xeTai1() {
 	mat4 mdlXT = model;
 
-	model = mdlXT * Translate(0, 0.005, 0);
+	model = mdlXT * Translate(0, 0.17, 0);
 	cabinXeTai1();
 
-	model = mdlXT * Translate(0, 0.005, 0);
+	model = mdlXT * Translate(0, 0.17, 0);
 	thungXeTai1();
 
-	model = mdlXT;
+	model = mdlXT * Translate(0, 0.155, 0);
 	allWheel1();
 }
 
@@ -478,15 +478,80 @@ void xeNang() {
 	allXNWheel();
 }
 
-GLfloat tXT = 0, tXN = 0;
+// Xe bon
+GLfloat rtdXBY = 0;
+void cabinXeBon() {
+	Paint(0, 255, 0);
+	mat4 mdl = model;
+
+	// Front + back cabin
+	block(0, 0.24, 0.48, 0.85, 0.4, 0.04);
+	block(0.5, 0.5, 0.48, 0.15, 0.92, 0.04);
+	block(-0.5, 0.5, 0.48, 0.15, 0.92, 0.04);
+	block(0, 0.91, 0.48, 0.85, 0.1, 0.04);
+
+	block(0, 0.5, -0.48, 1.15, 0.92, 0.04);
+
+	// Top + bottom cabin
+	block(0, 0.98, 0, 1.15, 0.04, 1);
+
+	block(0, 0.02, 0, 1.15, 0.04, 1);
+
+	// Door left
+	model = model * Translate(0.555, 0, 0.46) * RotateY(rtdXBY) * Translate(0, 0, -0.46);
+	block(0, 0.24, 0, 0.04, 0.4, 0.62);
+	block(0, 0.5, 0.385, 0.04, 0.92, 0.15);
+	block(0, 0.5, -0.385, 0.04, 0.92, 0.15);
+	block(0, 0.91, 0, 0.04, 0.1, 0.62);
+
+	// Door right
+	model = mdl * Translate(-0.555, 0, 0.46) * RotateY(-rtdXBY) * Translate(0, 0, -0.46);
+	block(0, 0.24, 0, 0.04, 0.4, 0.62);
+	block(0, 0.5, 0.385, 0.04, 0.92, 0.15);
+	block(0, 0.5, -0.385, 0.04, 0.92, 0.15);
+	block(0, 0.91, 0, 0.04, 0.1, 0.62);
+}
+void bonXe() {
+	// Be thung
+	block(0, 0.125, -1.65, 1.15, 0.25, 2.3);
+
+	// Bon xe
+	Paint(0, 0, 0);
+	mat4 instance;
+	for (int i = 0; i < 360; i++) {
+		instance = Translate(0, 0.8, -1.65) * Scale(0.75, 0.75, 2.25) * RotateZ(i);
+		glUniformMatrix4fv(model_loc, 1, GL_TRUE, model * instance);
+		glDrawArrays(GL_TRIANGLES, 0, NumPoints);
+	}
+}
+void allWheelXB() {
+	wheel(0.5, 0, 0, 0.15, 0.25);
+	wheel(-0.5, 0, 0, 0.15, 0.25);
+	wheel(0.5, 0, -2.25, 0.15, 0.25);
+	wheel(-0.5, 0, -2.25, 0.15, 0.25);
+}
+void xeBon() {
+	mat4 mdlXB = model;
+
+	model = mdlXB * Translate(0, 0.17, 0);
+	cabinXeBon();
+
+	model = mdlXB * Translate(0, 0.17, 0);
+	bonXe();
+
+	model = mdlXB * Translate(0, 0.155, 0);
+	allWheelXB();
+}
+
+GLfloat tXT = 0, tXN = 0, tXB = 0;
 void congTruong() {
 	model = RotateX(rtCTX) * RotateY(rtCTY) * RotateZ(rtCTZ);
 	mat4 mdlCT = model;
 	veSanCongTruong();
 
-	model = mdlCT * Translate(-3.5 - tXT, 0.02, 0) * RotateY(-90) * Scale(0.4);
+	model = mdlCT * Translate(-3.5 - tXT, 0, 0) * RotateY(-90) * Scale(0.4);
 	xeTai();
-	model = mdlCT * RotateY(60) * Translate(4, 0.02, 2 * tXT) * Scale(0.4);
+	model = mdlCT * RotateY(60) * Translate(4, 0, 2 * tXT) * Scale(0.4);
 	xeTai1();
 
 	model = mdlCT * Translate(tXN, 0, 3.3) * RotateY(-90);
@@ -498,9 +563,15 @@ void congTruong() {
 	model = mdlCT * Translate(0, -0.02, 0) * Scale(2, 5, 2);
 	nhaDangXay();
 
+	model = mdlCT * Translate(3.75, 0, -2 + tXB) * Scale(0.5);
+	xeBon();
+
 	//model = mdlCT;
 	//vatThe();
 }
+
+//GLfloat eX = 0.0, eY = 0.0, eZ = 4.0;
+//GLfloat lt = -1, rt = 1, bt = -1, tp = 1, zNr = 0.5, zFr = 5;
 
 GLfloat eX = 0.0, eY = 0.0, eZ = 10.0;
 GLfloat lt = -5, rt = 5, bt = -5, tp = 5, zNr = 2.5, zFr = 12;
@@ -534,18 +605,19 @@ void keyboard(unsigned char key, int x, int y)
 		case ' ':
 			rtCTX = 0, rtCTY = 0, rtCTZ = 0;
 			eX = 0, eY = 0.0, eZ = 10.0;
-			lt = -5, rt = 5, bt = -5, tp = 5; 
+			lt = -5, rt = 5, bt = -5, tp = 5;
 			zNr = 2.5, zFr = 15;
 
-			rtdY = 0, rtTXX = 0;
+			rtdY = 0, rtTXX = 0, tXT = 0;
+			rtdXBY = 0, tXB = 0;
 			rtdXN = 0, tHXN = 0.025;
 			tdCBCC = 0.0, rtCCY = 0.0, tYHHCC = 0.25, tZHHCC = 2.175;
 			break;
 	}
 
-	/* 
+	/*
 	* Dieu khien goc nhin va Cong Truong
-	* 
+	*
 	* Xoay toàn bộ công trường
 	*   w  -     X      +  s
 	*   a  -     Y      +  d
@@ -555,7 +627,7 @@ void keyboard(unsigned char key, int x, int y)
 	*   l  -    eyeX    +  '
 	*	;  -    eyeY    +  p
 	*   [  -    eyeZ    +  o
-	* 
+	*
 	* Thay đổi viewing
 	*	2  -     lt     +  1
 	*	4  -     bt     +  3
@@ -699,17 +771,17 @@ void keyboard(unsigned char key, int x, int y)
 
 	/*
 	* Dieu khien xe nang
-	* i, I: tien, lui
+	* u, U: tien, lui
 	* , <: Mo, dong cua
 	* . >: Nang, ha cang xe
 	*/
 	switch (key) {
 		// Tien lui
-		case 'i':
+		case 'u':
 			tXN -= 0.1;
-			if (tXN < -1.5) tXN = -1.5;
+			if (tXN < -3) tXN = -3;
 			break;
-		case 'I':
+		case 'U':
 			tXN += 0.1;
 			if (tXN > 0) tXN = 0;
 			break;
@@ -732,6 +804,33 @@ void keyboard(unsigned char key, int x, int y)
 		case '>':
 			tHXN -= 0.025;
 			if (tHXN < 0.025) tHXN = 0.025;
+			break;
+	}
+
+	/*
+	* Dieu khien xe bon
+	* i, I: tien, lui
+	* / ?: Mo, dong cua
+	*/
+	switch (key) {
+		// Tien lui
+		case 'i':
+			tXB += 0.2;
+			if (tXB > 4) tXB = 4;
+			break;
+		case 'I':
+			tXB -= 0.2;
+			if (tXB < 0) tXB = 0;
+			break;
+
+		// Dong mo cua
+		case 0x2F:
+			rtdXBY += 5;
+			if (rtdXBY > 0) rtdXBY = 0;
+			break;
+		case '?':
+			rtdXBY -= 5;
+			if (rtdXBY < -90) rtdXBY = -90;
 			break;
 	}
 
